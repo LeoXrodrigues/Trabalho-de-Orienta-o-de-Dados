@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Location {
+  id     String @id @default(cuid())
+  name   String @unique
+  city   String
+  state  String
+
+  originRoads Road[]     @relation("OriginRoads")
+  destRoads   Road[]     @relation("DestRoads")
+  vehicles    Vehicle[]
+  shipments   Shipment[]
+}
+
+model Road {
+  id            String   @id @default(cuid())
+  distance      Float
+  createdAt     DateTime @default(now())
+  sourceId      String
+  destinationId String
+  source        Location @relation("OriginRoads", fields: [sourceId], references: [id])
+  destination   Location @relation("DestRoads", fields: [destinationId], references: [id])
+
+  @@unique([sourceId, destinationId])
+}
+
+model Vehicle {
+  id           String     @id @default(cuid())
+  licensePlate String     @unique
+  capacityKg   Int
+  type         String
+  status       String     @default("available")
+  locationId   String
+  location     Location   @relation(fields: [locationId], references: [id])
+  shipments    Shipment[]
+}
+
+model Shipment {
+  id                String   @id @default(cuid())
+  cargoDescription  String
+  weightKg          Float
+  priority          Int      @default(3) // 1 (alta) a 5 (baixa)
+  status            String   @default("pending")
+  originId          String
+  destinationId     String
+  origin            Location @relation(fields: [originId], references: [id])
+  assignedVehicleId String?
+  assignedVehicle   Vehicle? @relation(fields: [assignedVehicleId], references: [id])
+  
+  // Armazena a rota planejada como uma lista de IDs de Location
+  plannedRoute      String?
+} 

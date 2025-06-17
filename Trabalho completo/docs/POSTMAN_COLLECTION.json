@@ -1,0 +1,423 @@
+{
+  "info": {
+    "name": "Sistema Nacional de Planejamento e Prioridade de Entregas",
+    "description": "API de logística que demonstra estruturas de dados: Fila de Prioridade, Árvore Binária e Grafo com Dijkstra",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏠 Informações Gerais",
+      "item": [
+        {
+          "name": "Documentação da API",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🎯 Planejamento (CORE)",
+      "item": [
+        {
+          "name": "🚀 ALGORITMO PRINCIPAL - Plan Next Shipment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/plan-next",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "plan-next"]
+            },
+            "description": "Executa o algoritmo completo de planejamento:\n1. Fila de Prioridade ordena entregas\n2. Árvore Binária agrupa em lotes\n3. Grafo + Dijkstra calcula rota ótima"
+          },
+          "response": []
+        },
+        {
+          "name": "🎓 DEMONSTRAÇÃO - Estruturas de Dados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/demonstrate-structures",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "demonstrate-structures"]
+            },
+            "description": "Endpoint educacional que mostra como cada estrutura de dados funciona no sistema"
+          },
+          "response": []
+        },
+        {
+          "name": "📊 Análise do Sistema",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/analysis",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "analysis"]
+            },
+            "description": "Análise detalhada do estado atual do planejamento"
+          },
+          "response": []
+        },
+        {
+          "name": "💚 Saúde do Planejamento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "health"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "❌ Cancelar Planejamento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipmentIds\": [\"shipment-1\", \"shipment-2\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/cancel",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "cancel"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "✅ Completar Entrega",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/complete/:shipmentId",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "complete", ":shipmentId"],
+              "variable": [
+                {
+                  "key": "shipmentId",
+                  "value": "shipment-1",
+                  "description": "ID da entrega a ser completada"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📍 Localidades",
+      "item": [
+        {
+          "name": "Listar Localidades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Criar Localidade",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Centro de Distribuição Curitiba\",\n  \"city\": \"Curitiba\",\n  \"state\": \"PR\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/locations",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Localidade por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "location-id",
+                  "description": "ID da localidade"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Localidade",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Centro de Distribuição SP - Atualizado\",\n  \"city\": \"São Paulo\",\n  \"state\": \"SP\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "location-id",
+                  "description": "ID da localidade"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remover Localidade",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "location-id",
+                  "description": "ID da localidade"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar Localidades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/search?q=São Paulo",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", "search"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "São Paulo",
+                  "description": "Termo de busca"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Estatísticas das Localidades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", "stats"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Localidades por Estado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/state/:state",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", "state", ":state"],
+              "variable": [
+                {
+                  "key": "state",
+                  "value": "SP",
+                  "description": "Sigla do estado"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Localidades por Cidade",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/city/:city",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", "city", ":city"],
+              "variable": [
+                {
+                  "key": "city",
+                  "value": "São Paulo",
+                  "description": "Nome da cidade"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Conexões da Localidade",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/locations/:id/connections",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "locations", ":id", "connections"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "location-id",
+                  "description": "ID da localidade"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🧪 Testes Sequenciais",
+      "item": [
+        {
+          "name": "1️⃣ Verificar Estado Inicial",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/analysis",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "analysis"]
+            },
+            "description": "Primeiro passo: ver quantas entregas estão pendentes"
+          },
+          "response": []
+        },
+        {
+          "name": "2️⃣ Executar Planejamento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/plan-next",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "plan-next"]
+            },
+            "description": "Segundo passo: executar o algoritmo principal"
+          },
+          "response": []
+        },
+        {
+          "name": "3️⃣ Ver Estruturas em Ação",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/demonstrate-structures",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "demonstrate-structures"]
+            },
+            "description": "Terceiro passo: visualizar como as estruturas de dados funcionaram"
+          },
+          "response": []
+        },
+        {
+          "name": "4️⃣ Verificar Resultados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planning/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "planning", "health"]
+            },
+            "description": "Quarto passo: verificar métricas finais"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+} 
