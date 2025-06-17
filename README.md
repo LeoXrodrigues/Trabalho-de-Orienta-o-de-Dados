@@ -1,1 +1,1 @@
-# Trabalho-de-Orienta-o-de-Dados
+Não subimos com prints por serem estruturas muito grande, espero que não se encomode de abrir nosso github para ver nossas estruturas, todas elas estão separadas e com os devidos comentarios para o entendimento do codigo.
